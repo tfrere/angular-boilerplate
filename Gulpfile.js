@@ -7,43 +7,49 @@
   var paths = {
 
       clean: {
-        files: './public'
+        files: './dist'
       },
-      serve : {
-        port: '8000',
-        root: './public'
+      server : {
+        port: '5000',
+        url: 'http://localhost',
+        file: './server.js'
       },
       fonts: {
         files: './src/assets/fonts/**/*',
-        dest: './public/assets/fonts/',
+        dest: './dist/assets/fonts/',
         watch: ['./src/assets/fonts/**/*']
       },
       vendor: {
         name: 'vendor.min.js',
-        dest: './public/vendor/',
+        dest: './dist/vendor/',
         watch: './bower_components/*'
       },
       templates: {
           files: './src/**/*.jade',
-          dest: './public/',
+          dest: './dist/',
           watch: './src/**/*.jade'
+      },
+      ressources: {
+        files: './src/ressources/*',
+        dest: './dist/ressources/',
+        watch: './src/ressources/*'
       },
       styles: {
           files:  './src/styles/*.scss',
-          dest: './public/styles/',
+          dest: './dist/styles/',
           watch: './src/styles/**/*.scss'
       },
       scripts: {
-          files: ['./src/scripts/directives/*.js', './src/scripts/*.js'],
-          dest: './public/scripts/',
+          files: ['./src/scripts/directives/*.js', './src/scripts/app.js', './src/scripts/services/*.js', './src/scripts/controllers/*.js'],
+          dest: './dist/scripts/',
           name: 'app.min.js',
           watch: './src/scripts/**/*.js'
       },
       assets : {
-        files: ['./src/assets/imgs/**/*{png,svg}'],
-        dest: './public/assets/imgs/',
+        files: ['./src/assets/imgs/**/*{png,svg, jpg}'],
+        dest: './dist/assets/imgs/',
         watch: './src/assets/imgs/**/*',
-        clean: './public/assets/imgs/**/*'
+        clean: './dist/assets/imgs/**/*'
       }
   }
   
@@ -52,7 +58,7 @@
   }
 
   gulp.task('clean', getTask('clean'));
-  gulp.task('serve', getTask('serve'));
+  gulp.task('nodemon', getTask('nodemon'));
   gulp.task('style', getTask('style'));
   gulp.task('assets', getTask('assets'));
   gulp.task('jade', getTask('jade'));
@@ -60,10 +66,11 @@
   gulp.task('vendor', getTask('vendor'));
   gulp.task('watch', getTask('watch'));
   gulp.task('test', getTask('test'));
+  gulp.task('ressources', getTask('ressources'));
 
   gulp.task('build-prod', function(cb) {
-    plugins.runSequence('clean', 'style', 'jade', 'assets', 'vendor', 'scripts');
+    plugins.runSequence('clean', 'style', 'jade', 'assets', 'vendor', 'scripts', 'ressources');
   });
 
-  gulp.task('default', ['watch', 'serve']);
+  gulp.task('default', ['watch', 'nodemon']);
   gulp.task('production', ['build-prod']);
