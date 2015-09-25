@@ -4,10 +4,15 @@
   var watch         = require('gulp-watch');
   var plugins       = require('gulp-load-plugins')();
 
+  var rootDir = {
+    dev : "./src",
+    dist : "./dist"
+  }
+
   var paths = {
 
       clean: {
-        files: './dist'
+        files: rootDir + ''
       },
       server : {
         port: '5000',
@@ -15,41 +20,41 @@
         file: './server.js'
       },
       fonts: {
-        files: './src/assets/fonts/**/*',
-        dest: './dist/assets/fonts/',
-        watch: ['./src/assets/fonts/**/*']
+        files: rootDir.dev + '/assets/fonts/**/*',
+        dest: rootDir.dist + '/assets/fonts/',
+        watch: [rootDir.dev + '/assets/fonts/**/*']
       },
       vendor: {
         name: 'vendor.min.js',
-        dest: './dist/vendor/',
+        dest: rootDir.dist + '/vendor/',
         watch: './bower_components/*'
       },
       templates: {
-          files: './src/**/*.jade',
-          dest: './dist/',
-          watch: './src/**/*.jade'
+          files: rootDir.dev + '/**/*.jade',
+          dest: rootDir.dist + '/',
+          watch: rootDir.dev + '/**/*.jade'
       },
       ressources: {
-        files: './src/ressources/*',
-        dest: './dist/ressources/',
-        watch: './src/ressources/*'
+        files: rootDir.dev + '/ressources/*',
+        dest: rootDir.dist + '/ressources/',
+        watch: rootDir.dev + '/ressources/*'
       },
       styles: {
-          files:  './src/styles/*.scss',
-          dest: './dist/styles/',
-          watch: './src/styles/**/*.scss'
+          files:  rootDir.dev + '/styles/*.scss',
+          dest: rootDir.dist + '/styles/',
+          watch: rootDir.dev + '/styles/**/*.scss'
       },
       scripts: {
-          files: ['./src/scripts/directives/*.js', './src/scripts/app.js', './src/scripts/services/*.js', './src/scripts/controllers/*.js'],
-          dest: './dist/scripts/',
+          files: [rootDir.dev + '/scripts/directives/*.js', rootDir.dev + '/scripts/app.js', rootDir.dev + '/scripts/services/*.js', rootDir.dev + '/scripts/controllers/*.js'],
+          dest: rootDir.dist + '/scripts/',
           name: 'app.min.js',
-          watch: './src/scripts/**/*.js'
+          watch: rootDir.dev + '/scripts/**/*.js'
       },
       assets : {
-        files: ['./src/assets/imgs/**/*{png,svg, jpg}'],
-        dest: './dist/assets/imgs/',
-        watch: './src/assets/imgs/**/*',
-        clean: './dist/assets/imgs/**/*'
+        files: [rootDir.dev + '/assets/imgs/**/*{png,svg, jpg}'],
+        dest: rootDir.dist + '/assets/imgs/',
+        watch: rootDir.dev + '/assets/imgs/**/*',
+        clean: rootDir.dist + '/assets/imgs/**/*'
       }
   }
   
